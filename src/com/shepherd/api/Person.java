@@ -1,6 +1,8 @@
 package com.shepherd.api;
 
 public class Person {
+    public long id;
+
     public String firstName;
     public String middleName;
     public String lastName;
