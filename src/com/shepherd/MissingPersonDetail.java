@@ -109,7 +109,7 @@ public class MissingPersonDetail extends Fragment implements OnClickListener, On
         } catch (JSONException e) {
             // Impossible.
         }
-        new JsonObjectRequest(Method.POST, NetUtils.MissingPeopleURL + "/" + personDetail.id, request, this, this);
+        new JsonObjectRequest(Method.PUT, NetUtils.MissingPeopleURL + "/" + personDetail.id, request, this, this);
     }
 
     @Override
