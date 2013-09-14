@@ -32,6 +32,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.shepherd.utils.ImageLoader;
 import com.shepherd.utils.ImageLoader.ImageLoaderProvider;
 
@@ -70,6 +72,7 @@ public class MainActivity extends FragmentActivity implements ImageLoaderProvide
     private String[] mPlanetTitles;
 
     private ImageLoader imageLoader;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +121,8 @@ public class MainActivity extends FragmentActivity implements ImageLoaderProvide
         }
 
         imageLoader = new ImageLoader(this, R.drawable.defaultperson);
+        requestQueue = Volley.newRequestQueue(this);
+        requestQueue.start();
     }
 
     @Override
@@ -212,10 +217,20 @@ public class MainActivity extends FragmentActivity implements ImageLoaderProvide
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    
+    @Override
+    public void onDestroy(){
+    	super.onDestroy();
+    	requestQueue.stop();
+    }
 
     @Override
     public ImageLoader getImageLoaderInstance() {
         return imageLoader;
+    }
+    
+    public RequestQueue getRequestQueue(){
+    	return requestQueue;
     }
 
 }
