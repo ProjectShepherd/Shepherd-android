@@ -16,9 +16,9 @@
 
 package com.shepherd;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -59,7 +59,7 @@ import android.widget.ListView;
  * An action should be an operation performed on the current contents of the window,
  * for example enabling or disabling a data overlay on top of the current content.</p>
  */
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -154,7 +154,7 @@ public class MainActivity extends Activity {
     }
 
     private void selectItem(int position) {
-    	FragmentManager fragmentManager = getFragmentManager();
+    	FragmentManager fragmentManager = getSupportFragmentManager();
     	Bundle args = new Bundle();
         
     	switch(position){

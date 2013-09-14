@@ -1,7 +1,10 @@
 package com.shepherd;
 
-import android.app.Fragment;
-import android.app.ListFragment;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +62,7 @@ public class PersonSearchFragment extends ListFragment implements OnClickListene
 	public void onListItemClick(ListView l, View v, int position, long id) {
     	SampleFragment newFrag = new SampleFragment();
 
-		this.getActivity().getFragmentManager()
+		this.getActivity().getSupportFragmentManager()
 				.beginTransaction().replace(R.id.content_frame, newFrag)
 				// TODO Add this transaction to the back stack
 				// .addToBackStack("placeholder")
@@ -68,9 +71,13 @@ public class PersonSearchFragment extends ListFragment implements OnClickListene
     
     @Override
 	public void onClick(View v) {
-    			SampleFragment newFrag = new SampleFragment();
+    			MissingPersonDetail newFrag = null;
+				try {
+					newFrag = MissingPersonDetail.newInstance(new JSONObject("{first_name: 'FIRST',middle_name: 'M',last_name: 'XXXXXX'}"));
+				} catch (JSONException e) {
+				}
 
-    			this.getActivity().getFragmentManager()
+    			this.getActivity().getSupportFragmentManager()
     					.beginTransaction().replace(R.id.content_frame, newFrag)
     					// TODO Add this transaction to the back stack
     					// .addToBackStack("placeholder")

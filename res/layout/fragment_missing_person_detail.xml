@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/personImage"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
@@ -156,7 +156,7 @@
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/includeLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
