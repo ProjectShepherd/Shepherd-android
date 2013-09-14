@@ -42,6 +42,7 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 			view.pic = (ImageView) rowView
 					.findViewById(R.id.thumbnailImageView);
 			view.name = (TextView) rowView.findViewById(R.id.nameTextView);
+			view.description = (TextView) rowView.findViewById(R.id.descriptionTextView);
 
 			rowView.setTag(view);
 		} else {
@@ -51,7 +52,12 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 		/** Set data to your Views. */
 		Person item = list.get(position);
 
-		view.name.setText(item.firstName);
+		if(item.firstName!=null && item.middleName!=null && item.lastName!=null)
+			view.name.setText(item.firstName+" "+item.middleName+" '"+item.lastName);
+		if(item.description!=null)
+			view.description.setText(item.description);
+		//if(item.thumb!=null)
+		//	((MainActivity)activity).getImageLoaderInstance().get(item.thumb, view.pic, R.drawable.defaultperson);
 		rowView.setMinimumHeight(96);
 		return rowView;
 	}
@@ -59,5 +65,6 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 	protected static class ViewHolder {
 		protected ImageView pic;
 		protected TextView name;
+		protected TextView description;
 	}
 }
