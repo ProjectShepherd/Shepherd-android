@@ -16,21 +16,15 @@ import android.widget.TextView;
 
 public class PersonAdapter extends ArrayAdapter<Person> {
 
-	public PersonAdapter(Activity context, List<Person> jsonResponse) {
+	public PersonAdapter(Activity context, ArrayList<Person> objects) {
 		super(context, R.layout.person_row);
 		this.activity = context;
-		this.list = jsonResponse;
+		this.list = objects;
 	}
 
 	private final Activity activity;
-	private final List<Person> list;
+	private final ArrayList<Person> list;
 
-	@Override
-	public void add(Person p){
-		super.add(p);
-		this.list.add(p);
-	}
-	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
@@ -48,36 +42,22 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 			view.pic = (ImageView) rowView
 					.findViewById(R.id.thumbnailImageView);
 			view.name = (TextView) rowView.findViewById(R.id.nameTextView);
-			view.description = (TextView) rowView.findViewById(R.id.personDescription);
 
 			rowView.setTag(view);
 		} else {
 			view = (ViewHolder) rowView.getTag();
 		}
 
-		Log.e("getView",""+position);		
 		/** Set data to your Views. */
 		Person item = list.get(position);
-		Log.e("item",item.firstName);
-		
-		
-		if(view!=null){
-		
-	//	((MainActivity)this.activity).getImageLoaderInstance().get("http://i.imgur.com/TiT9Baz.jpg", view.pic);
-		if(item.firstName!=null && item.lastName!=null)
-			view.name.setText(item.firstName +" "+item.lastName);
-		if(item.description!=null)
-			view.description.setText(item.description);
-		}else{
-			Log.e("wtf","view is null");
-		}
-			
+
+		view.name.setText(item.firstName);
+		rowView.setMinimumHeight(96);
 		return rowView;
 	}
 
 	protected static class ViewHolder {
 		protected ImageView pic;
 		protected TextView name;
-		protected TextView description;
 	}
 }

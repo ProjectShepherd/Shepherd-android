@@ -39,7 +39,8 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONA
 
 	protected View mFormView, mStatusView;
 	private RequestQueue volleyQueue;
-	private List<Person> people;
+	public ArrayList<Person> people;
+	public PersonAdapter peopleAdapter;
 	
 	
 	public PersonSearchFragment() {
@@ -57,6 +58,8 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONA
 		mStatusView.setVisibility(View.VISIBLE);
 		mFormView.setVisibility(View.GONE);
         
+		people = new ArrayList<Person>();
+		peopleAdapter = new PersonAdapter(this.getActivity(), people);
 		
 		volleyQueue = Volley.newRequestQueue(this.getActivity());
 		volleyQueue.add(new JsonArrayRequest(NetUtils.MissingPeopleURL+".json", this, this));
@@ -76,32 +79,13 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONA
     	mStatusView.setVisibility(View.GONE);
 		mFormView.setVisibility(View.VISIBLE);
     	
-		
-		ArrayList<Person> people = new ArrayList<Person>();
-		
-		
-		List<Person> jsonResponse = PersonUtils.getMissingPersons(response, null);
-		
-		Log.e("onResponse","size"+jsonResponse.size());
-		/*
-		adapter.clear();
-		for(Person p : jsonResponse){
-			Log.e("person",p.firstName);
-			//people.add(new Person);
-			adapter.add(new Person(p));
+		for(Person p : PersonUtils.getMissingPersons(response, null)){
+			Log.e("person", p.firstName);
+			
+			people.add(p);
+			peopleAdapter.add(p);
 		}
-		//adapter.add(new Person());
-		//adapter.add(new Person());
-		
-		//adapter.notifyDataSetChanged();
-		*/
-		PersonAdapter adapter = new PersonAdapter(this.getActivity(), people);
-		
-		setListAdapter(adapter);
-		
-		adapter.addAll(jsonResponse);
-		adapter.notifyDataSetChanged();
-		//this.getListView().invalidateViews();
+		peopleAdapter.notifyDataSetChanged();
     }
     
     @Override
