@@ -1,10 +1,12 @@
 package com.shepherd;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.shepherd.api.Person;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +16,21 @@ import android.widget.TextView;
 
 public class PersonAdapter extends ArrayAdapter<Person> {
 
-	public PersonAdapter(Activity context, ArrayList<Person> objects) {
+	public PersonAdapter(Activity context, List<Person> jsonResponse) {
 		super(context, R.layout.person_row);
 		this.activity = context;
-		this.list = objects;
+		this.list = jsonResponse;
 	}
 
 	private final Activity activity;
-	private final ArrayList<Person> list;
+	private final List<Person> list;
 
+	@Override
+	public void add(Person p){
+		super.add(p);
+		this.list.add(p);
+	}
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
@@ -47,15 +55,23 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 			view = (ViewHolder) rowView.getTag();
 		}
 
+		Log.e("getView",""+position);		
 		/** Set data to your Views. */
 		Person item = list.get(position);
-
-		((MainActivity)this.activity).getImageLoaderInstance().get("http://i.imgur.com/TiT9Baz.jpg", view.pic);
+		Log.e("item",item.firstName);
+		
+		
+		if(view!=null){
+		
+	//	((MainActivity)this.activity).getImageLoaderInstance().get("http://i.imgur.com/TiT9Baz.jpg", view.pic);
 		if(item.firstName!=null && item.lastName!=null)
 			view.name.setText(item.firstName +" "+item.lastName);
 		if(item.description!=null)
 			view.description.setText(item.description);
-		
+		}else{
+			Log.e("wtf","view is null");
+		}
+			
 		return rowView;
 	}
 
