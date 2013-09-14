@@ -1,7 +1,11 @@
 package com.shepherd;
 
+import java.util.ArrayList;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.shepherd.api.Person;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -55,7 +59,14 @@ public class PersonSearchFragment extends ListFragment implements OnClickListene
 		mFormView.setVisibility(View.VISIBLE);
     	
 		
+		ArrayList<Person> people = new ArrayList<Person>();
 		
+		PersonAdapter adapter = new PersonAdapter(this.getActivity(), people);
+		setListAdapter(adapter);
+		
+		adapter.add(new Person());
+		people.add(new Person());
+		people.add(new Person());
     }
     
     @Override
