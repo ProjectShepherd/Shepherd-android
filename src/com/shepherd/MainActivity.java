@@ -16,6 +16,9 @@
 
 package com.shepherd;
 
+import com.shepherd.utils.ImageLoader;
+import com.shepherd.utils.ImageLoader.ImageLoaderProvider;
+
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -59,7 +62,7 @@ import android.widget.ListView;
  * An action should be an operation performed on the current contents of the window,
  * for example enabling or disabling a data overlay on top of the current content.</p>
  */
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements ImageLoaderProvider{
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -67,6 +70,9 @@ public class MainActivity extends FragmentActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mPlanetTitles;
+    
+    private ImageLoader imageLoader;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +119,8 @@ public class MainActivity extends FragmentActivity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+        
+        imageLoader = new ImageLoader(this,R.drawable.ic_launcher);
     }
 
     @Override
@@ -209,5 +217,10 @@ public class MainActivity extends FragmentActivity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+	@Override
+	public ImageLoader getImageLoaderInstance() {
+		return imageLoader;
+	}
 
 }

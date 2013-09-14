@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -54,36 +55,36 @@ public class MissingPersonDetail extends Fragment implements OnClickListener {
 	public static MissingPersonDetail newInstance(JSONObject personDetail) {
 		MissingPersonDetail fragment = new MissingPersonDetail();
 		Bundle args = new Bundle();
-		try {
-			args.putString(PERSON_DETAIL_FIRST_NAME,
-					personDetail.getString(PERSON_DETAIL_FIRST_NAME));
-			args.putString(PERSON_DETAIL_MIDDLE_NAME,
-					personDetail.getString(PERSON_DETAIL_MIDDLE_NAME));
-			args.putString(PERSON_DETAIL_LAST_NAME,
-					personDetail.getString(PERSON_DETAIL_LAST_NAME));
-			args.putString(PERSON_DETAIL_AGE,
-					personDetail.getString(PERSON_DETAIL_AGE));
-			args.putString(PERSON_DETAIL_HEIGHT,
-					personDetail.getString(PERSON_DETAIL_HEIGHT));
-			args.putString(PERSON_DETAIL_WEIGHT,
-					personDetail.getString(PERSON_DETAIL_WEIGHT));
-			args.putString(PERSON_DETAIL_SEX,
-					personDetail.getString(PERSON_DETAIL_SEX));
-			args.putString(PERSON_DETAIL_HAIR,
-					personDetail.getString(PERSON_DETAIL_HAIR));
-			args.putString(PERSON_DETAIL_EYE,
-					personDetail.getString(PERSON_DETAIL_EYE));
-			args.putString(PERSON_DETAIL_RACE,
-					personDetail.getString(PERSON_DETAIL_RACE));
-			args.putString(PERSON_DETAIL_DESCRIPTION,
-					personDetail.getString(PERSON_DETAIL_DESCRIPTION));
-			if (!personDetail.getJSONArray("pictures").isNull(0))
-				args.putString(PERSON_DETAIL_PHOTO,
-						personDetail.getJSONArray("pictures").getJSONObject(0)
-								.getString("mobile"));
-		} catch (JSONException e) {
-			throw new IllegalArgumentException(e);
-		}
+//		try {
+//			args.putString(PERSON_DETAIL_FIRST_NAME,
+//					personDetail.getString(PERSON_DETAIL_FIRST_NAME));
+//			args.putString(PERSON_DETAIL_MIDDLE_NAME,
+//					personDetail.getString(PERSON_DETAIL_MIDDLE_NAME));
+//			args.putString(PERSON_DETAIL_LAST_NAME,
+//					personDetail.getString(PERSON_DETAIL_LAST_NAME));
+//			args.putString(PERSON_DETAIL_AGE,
+//					personDetail.getString(PERSON_DETAIL_AGE));
+//			args.putString(PERSON_DETAIL_HEIGHT,
+//					personDetail.getString(PERSON_DETAIL_HEIGHT));
+//			args.putString(PERSON_DETAIL_WEIGHT,
+//					personDetail.getString(PERSON_DETAIL_WEIGHT));
+//			args.putString(PERSON_DETAIL_SEX,
+//					personDetail.getString(PERSON_DETAIL_SEX));
+//			args.putString(PERSON_DETAIL_HAIR,
+//					personDetail.getString(PERSON_DETAIL_HAIR));
+//			args.putString(PERSON_DETAIL_EYE,
+//					personDetail.getString(PERSON_DETAIL_EYE));
+//			args.putString(PERSON_DETAIL_RACE,
+//					personDetail.getString(PERSON_DETAIL_RACE));
+//			args.putString(PERSON_DETAIL_DESCRIPTION,
+//					personDetail.getString(PERSON_DETAIL_DESCRIPTION));
+//			if (!personDetail.getJSONArray("pictures").isNull(0))
+//				args.putString(PERSON_DETAIL_PHOTO,
+//						personDetail.getJSONArray("pictures").getJSONObject(0)
+//								.getString("mobile"));
+//		} catch (JSONException e) {
+//			throw new IllegalArgumentException(e);
+//		}
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -108,36 +109,38 @@ public class MissingPersonDetail extends Fragment implements OnClickListener {
 		View view = inflater.inflate(R.layout.fragment_missing_person_detail,
 				container, false);
 		if (getArguments() != null) {
-			((TextView) (view.findViewById(R.id.personName)))
-					.setText(String
-							.format("%s %s %s",
-									getArguments().getString(
-											PERSON_DETAIL_FIRST_NAME),
-									getArguments().getString(
-											PERSON_DETAIL_MIDDLE_NAME),
-									getArguments().getString(
-											PERSON_DETAIL_LAST_NAME)));
-			((TextView) (view.findViewById(R.id.personAge)))
-					.setText(getArguments().getString(PERSON_DETAIL_AGE));
-			((TextView) (view.findViewById(R.id.personHeight)))
-					.setText(getArguments().getString(PERSON_DETAIL_HEIGHT));
-			((TextView) (view.findViewById(R.id.personWeight)))
-					.setText(getArguments().getString(PERSON_DETAIL_WEIGHT));
-			((TextView) (view.findViewById(R.id.personSex)))
-					.setText(getArguments().getString(PERSON_DETAIL_SEX)
-							.equals("F") ? "Female" : "Male");
-			((TextView) (view.findViewById(R.id.personHairColor)))
-					.setText(getArguments().getString(PERSON_DETAIL_HAIR));
-			((TextView) (view.findViewById(R.id.personEyeColor)))
-					.setText(getArguments().getString(PERSON_DETAIL_EYE));
-			((TextView) (view.findViewById(R.id.personRace)))
-					.setText(getArguments().getString(PERSON_DETAIL_RACE));
-			((TextView) (view.findViewById(R.id.personDescription)))
-					.setText(getArguments()
-							.getString(PERSON_DETAIL_DESCRIPTION));
-
-			((NetworkImageView)(view.findViewById(R.id.personImage))).setImageUrl(getArguments()
-							.getString(PERSON_DETAIL_PHOTO), imageLoader)
+//			((TextView) (view.findViewById(R.id.personName)))
+//					.setText(String
+//							.format("%s %s %s",
+//									getArguments().getString(
+//											PERSON_DETAIL_FIRST_NAME),
+//									getArguments().getString(
+//											PERSON_DETAIL_MIDDLE_NAME),
+//									getArguments().getString(
+//											PERSON_DETAIL_LAST_NAME)));
+//			((TextView) (view.findViewById(R.id.personAge)))
+//					.setText(getArguments().getString(PERSON_DETAIL_AGE));
+//			((TextView) (view.findViewById(R.id.personHeight)))
+//					.setText(getArguments().getString(PERSON_DETAIL_HEIGHT));
+//			((TextView) (view.findViewById(R.id.personWeight)))
+//					.setText(getArguments().getString(PERSON_DETAIL_WEIGHT));
+//			((TextView) (view.findViewById(R.id.personSex)))
+//					.setText(getArguments().getString(PERSON_DETAIL_SEX)
+//							.equals("F") ? "Female" : "Male");
+//			((TextView) (view.findViewById(R.id.personHairColor)))
+//					.setText(getArguments().getString(PERSON_DETAIL_HAIR));
+//			((TextView) (view.findViewById(R.id.personEyeColor)))
+//					.setText(getArguments().getString(PERSON_DETAIL_EYE));
+//			((TextView) (view.findViewById(R.id.personRace)))
+//					.setText(getArguments().getString(PERSON_DETAIL_RACE));
+//			((TextView) (view.findViewById(R.id.personDescription)))
+//					.setText(getArguments()
+//							.getString(PERSON_DETAIL_DESCRIPTION));
+//			
+			((MainActivity)getActivity()).getImageLoaderInstance().get("http://i.imgur.com/TiT9Baz.jpg", (ImageView) view.findViewById(R.id.personImage));
+//
+//			((NetworkImageView)(view.findViewById(R.id.personImage))).setImageUrl(getArguments()
+//							.getString(PERSON_DETAIL_PHOTO), imageLoader)
 		}
 		view.findViewById(R.id.markFound).setOnClickListener(this);
 		return view;
