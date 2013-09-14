@@ -160,7 +160,6 @@ public class MainActivity extends Activity {
     	switch(position){
         case 0:
         	Fragment psFragment = new PersonSearchFragment();
-	        args.putInt(SampleFragment.ARG_PAGE_NUMBER, position);
 	        psFragment.setArguments(args);
 	
 	        
@@ -174,7 +173,6 @@ public class MainActivity extends Activity {
         default:
 	    	// update the main content by replacing fragments
 	        Fragment fragment = new SampleFragment();
-	        args.putInt(SampleFragment.ARG_PAGE_NUMBER, position);
 	        fragment.setArguments(args);
 	
 	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
