@@ -22,7 +22,7 @@ public class PersonUtils {
     private static final String EYE = "eye_color";
     private static final String RACE = "race";
     private static final String DESCRIPTION = "description";
-    private static final String PHOTOS = "photos";
+    private static final String PICTURES = "pictures";
     private static final String MOBILE = "mobile";
     private static final String THUMB = "thumb";
 
@@ -107,13 +107,13 @@ public class PersonUtils {
                 }
 
                 try {
-                    person.photo = jsonPerson.getJSONArray(PHOTOS).getJSONObject(0).getString(MOBILE);
+                    person.photo = jsonPerson.getJSONArray(PICTURES).getJSONObject(0).getString(MOBILE);
                 } catch (JSONException e) {
                     person.photo = null;
                 }
 
                 try {
-                    person.thumb = jsonPerson.getJSONArray(PHOTOS).getJSONObject(0).getString(THUMB);
+                    person.thumb = jsonPerson.getJSONArray(PICTURES).getJSONObject(0).getString(THUMB);
                 } catch (JSONException e) {
                     person.thumb = null;
                 }
