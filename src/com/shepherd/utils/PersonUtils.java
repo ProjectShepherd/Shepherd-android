@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import com.shepherd.api.Person;
 
 public class PersonUtils {
-    private static final String REPORT_ID = "report_id";
+    private static final String REPORTER_ID = "reporter_id";
     private static final String FIRST_NAME = "first_name";
     private static final String MIDDLE_NAME = "middle_name";
     private static final String LAST_NAME = "last_name";
@@ -38,7 +38,7 @@ public class PersonUtils {
                 jsonPerson = jsonPersons.getJSONObject(i);
                 person = new Person();
 
-                person.id = jsonPerson.getLong(REPORT_ID);
+                person.id = jsonPerson.getLong(REPORTER_ID);
 
                 try {
                     person.firstName = jsonPerson.getString(FIRST_NAME);
