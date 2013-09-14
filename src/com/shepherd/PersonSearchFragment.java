@@ -5,7 +5,13 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.Volley;
 import com.shepherd.api.Person;
+import com.shepherd.utils.PersonUtils;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -20,9 +26,10 @@ import android.widget.ListView;
 /**
  * Fragment that appears in the "content_frame", shows a planet
  */
-public class PersonSearchFragment extends ListFragment implements OnClickListener{
+public class PersonSearchFragment extends ListFragment implements OnClickListener, Listener<JSONObject>{
 
 	protected View mFormView, mStatusView;
+	private RequestQueue volleyQueue;
 	
 	public PersonSearchFragment() {
         // Empty constructor required for fragment subclasses
@@ -39,8 +46,10 @@ public class PersonSearchFragment extends ListFragment implements OnClickListene
 		mStatusView.setVisibility(View.VISIBLE);
 		mFormView.setVisibility(View.GONE);
         
-        //TODO remove and replace with networking
-		onResult();
+        String dummyURL = "";
+		
+		volleyQueue = Volley.newRequestQueue(this.getActivity());
+		volleyQueue.add(new JsonObjectRequest(dummyURL, null, this, null));
         
         
         String page = getResources().getStringArray(R.array.pages_array)[0];
@@ -50,16 +59,17 @@ public class PersonSearchFragment extends ListFragment implements OnClickListene
     }
     
     
-    public void onResult(){
-    	//TODO plug into volley
+    @Override
+	public void onResponse(JSONObject response) {
     	mStatusView.setVisibility(View.GONE);
 		mFormView.setVisibility(View.VISIBLE);
     	
 		
-		ArrayList<Person> people = new ArrayList<Person>();
 		
-		PersonAdapter adapter = new PersonAdapter(this.getActivity(), people);
+		PersonAdapter adapter = new PersonAdapter(this.getActivity(), new ArrayList<Person>());
 		setListAdapter(adapter);
+		
+		ArrayList<Person> people = new PersonUtils.getMissingPersons(response.toString(), null);
 		
 		adapter.add(new Person());
 		people.add(new Person());
