@@ -44,9 +44,6 @@ public class PersonSearchFragment extends ListFragment implements OnClickListene
         
         
         String page = getResources().getStringArray(R.array.pages_array)[0];
-
-        Button b = (Button) rootView.findViewById(R.id.button1);
-        b.setOnClickListener(this);
         
         getActivity().setTitle(page);
         return rootView;

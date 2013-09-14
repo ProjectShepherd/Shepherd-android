@@ -40,6 +40,7 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 			view.pic = (ImageView) rowView
 					.findViewById(R.id.thumbnailImageView);
 			view.name = (TextView) rowView.findViewById(R.id.nameTextView);
+			view.description = (TextView) rowView.findViewById(R.id.personDescription);
 
 			rowView.setTag(view);
 		} else {
@@ -49,8 +50,11 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 		/** Set data to your Views. */
 		Person item = list.get(position);
 
-		view.name.setText("asdf");
 		((MainActivity)this.activity).getImageLoaderInstance().get("http://i.imgur.com/TiT9Baz.jpg", view.pic);
+		if(item.firstName!=null && item.lastName!=null)
+			view.name.setText(item.firstName +" "+item.lastName);
+		if(item.description!=null)
+			view.description.setText(item.description);
 		
 		return rowView;
 	}
@@ -58,5 +62,6 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 	protected static class ViewHolder {
 		protected ImageView pic;
 		protected TextView name;
+		protected TextView description;
 	}
 }
