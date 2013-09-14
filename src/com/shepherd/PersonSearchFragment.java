@@ -85,12 +85,13 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONA
 			people.add(p);
 			peopleAdapter.add(p);
 		}
-		peopleAdapter.notifyDataSetChanged();
+		this.setListAdapter(peopleAdapter);
     }
     
     @Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
     	MissingPersonDetail newFrag = new MissingPersonDetail();
+    	
     	newFrag.setPersonDetail(people.get(position));
 
 		this.getActivity().getSupportFragmentManager()
