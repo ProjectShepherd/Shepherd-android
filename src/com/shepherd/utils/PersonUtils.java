@@ -10,23 +10,23 @@ import org.json.JSONObject;
 import com.shepherd.api.Person;
 
 public class PersonUtils {
-    private static final String REPORTER_ID = "reporter_id";
-    private static final String FIRST_NAME = "first_name";
-    private static final String MIDDLE_NAME = "middle_name";
-    private static final String LAST_NAME = "last_name";
-    private static final String AGE = "age";
-    private static final String HEIGHT = "height";
-    private static final String WEIGHT = "weight";
-    private static final String SEX = "sex";
-    private static final String HAIR = "hair_color";
-    private static final String EYE = "eye_color";
-    private static final String RACE = "race";
-    private static final String DESCRIPTION = "description";
-    private static final String PICTURES = "pictures";
-    private static final String MOBILE = "mobile";
-    private static final String THUMB = "thumb";
+	private static final String REPORTER_ID = "reporter_id";
+	private static final String FIRST_NAME = "first_name";
+	private static final String MIDDLE_NAME = "middle_name";
+	private static final String LAST_NAME = "last_name";
+	private static final String AGE = "age";
+	private static final String HEIGHT = "height";
+	private static final String WEIGHT = "weight";
+	private static final String SEX = "sex";
+	private static final String HAIR = "hair_color";
+	private static final String EYE = "eye_color";
+	private static final String RACE = "race";
+	private static final String DESCRIPTION = "description";
+	private static final String PICTURES = "pictures";
+	private static final String MOBILE = "mobile";
+	private static final String THUMB = "thumb";
 
-    public static List<Person> getMissingPersons(JSONArray jsonPersons, String fuzzyMatch) {
+	public static List<Person> getMissingPersons(JSONArray jsonPersons, String fuzzyMatch) {
         List<Person> persons = new ArrayList<Person>();
 
         try {
@@ -116,6 +116,9 @@ public class PersonUtils {
                 } catch (JSONException e) {
                     person.thumb = null;
                 }
+                try{
+                	if(jsonPerson.getBoolean("found") == true)continue ;
+                } catch (JSONException e){}
 
                 if (fuzzyMatch == null) {
                     persons.add(person);

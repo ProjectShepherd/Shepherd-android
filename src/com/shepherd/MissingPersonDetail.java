@@ -129,6 +129,12 @@ public class MissingPersonDetail extends Fragment implements OnClickListener,
 			if (location != null) {
 				request.put("found_location", location);
 			}
+			else{
+				location = new JSONObject();
+				location.put("lag", 0.0);
+				location.put("long", 0.0);
+				request.put("found_location", location);
+			}
 		} catch (JSONException e) {
 			// Impossible.
 		}
@@ -174,7 +180,14 @@ public class MissingPersonDetail extends Fragment implements OnClickListener,
 	public void onResponse(String arg0) {
 		Log.e("asdf", "Response!!!" + arg0.toString());
 		((Button) (getView().findViewById(R.id.markFound))).setText("Success!");
-		getActivity().onBackPressed();
+		// getActivity().onBackPressed();
+		PersonSearchFragment newFrag = new PersonSearchFragment();
+
+		this.getActivity().getSupportFragmentManager().beginTransaction()
+				.replace(R.id.content_frame, newFrag)
+				// TODO Add this transaction to the back stack
+				// .addToBackStack("placeholder")
+				.commit();
 	}
 
 }
