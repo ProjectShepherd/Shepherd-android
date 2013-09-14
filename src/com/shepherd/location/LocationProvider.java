@@ -25,6 +25,8 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
 
     public Location getLastLocation() {
         locationclient.connect();
+        while (locationclient.isConnecting()) {
+        }
         Location loc = locationclient.getLastLocation();
         Log.i(TAG, "Last Known Location :" + loc.getLatitude() + "," + loc.getLongitude());
         locationclient.disconnect();
