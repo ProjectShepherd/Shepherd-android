@@ -26,11 +26,10 @@ public class PersonUtils {
     private static final String MOBILE = "mobile";
     private static final String THUMB = "thumb";
 
-    public static List<Person> getMissingPersons(String jsonResponse, String fuzzyMatch) {
+    public static List<Person> getMissingPersons(JSONArray jsonPersons, String fuzzyMatch) {
         List<Person> persons = new ArrayList<Person>();
 
         try {
-            JSONArray jsonPersons = new JSONArray(jsonResponse);
 
             JSONObject jsonPerson;
             Person person;

@@ -77,14 +77,31 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONA
 		mFormView.setVisibility(View.VISIBLE);
     	
 		
+		ArrayList<Person> people = new ArrayList<Person>();
 		
-		PersonAdapter adapter = new PersonAdapter(this.getActivity(), new ArrayList<Person>());
+		
+		List<Person> jsonResponse = PersonUtils.getMissingPersons(response, null);
+		
+		Log.e("onResponse","size"+jsonResponse.size());
+		/*
+		adapter.clear();
+		for(Person p : jsonResponse){
+			Log.e("person",p.firstName);
+			//people.add(new Person);
+			adapter.add(new Person(p));
+		}
+		//adapter.add(new Person());
+		//adapter.add(new Person());
+		
+		//adapter.notifyDataSetChanged();
+		*/
+		PersonAdapter adapter = new PersonAdapter(this.getActivity(), people);
+		
 		setListAdapter(adapter);
 		
-		people = PersonUtils.getMissingPersons(response.toString(), null);
-		for(Person p : people){
-			adapter.add(p);
-		}
+		adapter.addAll(jsonResponse);
+		adapter.notifyDataSetChanged();
+		//this.getListView().invalidateViews();
     }
     
     @Override

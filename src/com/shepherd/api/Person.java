@@ -16,4 +16,14 @@ public class Person {
     public String description;
     public String photo;
     public String thumb;
+    
+    public Person(){
+    }
+    public Person(Person other){
+    	Person p = new Person();
+    	p.id = other.id;
+    	p.firstName = other.firstName;
+    	p.lastName = other.lastName;
+    	p.description = other.description;
+    }
 }
