@@ -22,7 +22,7 @@ public class PersonUtils {
     private static final String EYE = "eye_color";
     private static final String RACE = "race";
     private static final String DESCRIPTION = "description";
-    private static final String PHOTO = "photo";
+    private static final String PHOTOS = "photos";
 
     private static List<Person> getMissingPersons(String jsonResponse, String fuzzyMatch) {
         List<Person> persons = new ArrayList<Person>();
@@ -52,7 +52,8 @@ public class PersonUtils {
                 person.race = jsonPerson.getString(RACE);
 
                 person.description = jsonPerson.getString(DESCRIPTION);
-                person.photo = jsonPerson.getString(PHOTO);
+                person.photo = jsonPerson.getJSONArray(PHOTOS).getString(0);
+                person.thumb = jsonPerson.getJSONArray(PHOTOS).getString(2);
 
                 if (fuzzyMatch == null) {
                     persons.add(person);

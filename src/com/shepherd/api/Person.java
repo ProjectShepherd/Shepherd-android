@@ -15,4 +15,5 @@ public class Person {
     public String race;
     public String description;
     public String photo;
+    public String thumb;
 }
