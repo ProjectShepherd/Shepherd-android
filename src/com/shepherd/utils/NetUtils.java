@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 public class NetUtils {
+	public static final String MissingPeopleURL = "http://projectshepherd.herokuapp.com/missing_people";
+	
     private static String mUserAgent = null;
 
     public static String getUserAgent(Context mContext) {
