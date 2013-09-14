@@ -23,8 +23,7 @@ public class SampleFragment extends Fragment implements OnLocationObtainedListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
-        int i = getArguments().getInt(ARG_PAGE_NUMBER);
-        String page = getResources().getStringArray(R.array.pages_array)[i];
+        String page = getResources().getStringArray(R.array.pages_array)[1];
 
         LocationProvider lp = new LocationProvider(getActivity());
         lp.getLocation(this);
