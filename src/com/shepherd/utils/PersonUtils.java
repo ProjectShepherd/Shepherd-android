@@ -26,7 +26,7 @@ public class PersonUtils {
     private static final String MOBILE = "mobile";
     private static final String THUMB = "thumb";
 
-    private static List<Person> getMissingPersons(String jsonResponse, String fuzzyMatch) {
+    public static List<Person> getMissingPersons(String jsonResponse, String fuzzyMatch) {
         List<Person> persons = new ArrayList<Person>();
 
         try {
@@ -40,28 +40,90 @@ public class PersonUtils {
 
                 person.id = jsonPerson.getLong(REPORT_ID);
 
-                person.firstName = jsonPerson.getString(FIRST_NAME);
-                person.middleName = jsonPerson.getString(MIDDLE_NAME);
-                person.lastName = jsonPerson.getString(LAST_NAME);
+                try {
+                    person.firstName = jsonPerson.getString(FIRST_NAME);
+                } catch (JSONException e) {
+                    person.firstName = null;
+                }
 
-                person.age = jsonPerson.getInt(AGE);
-                person.height = jsonPerson.getInt(HEIGHT);
-                person.weight = jsonPerson.getInt(WEIGHT);
+                try {
+                    person.middleName = jsonPerson.getString(MIDDLE_NAME);
+                } catch (JSONException e) {
+                    person.middleName = null;
+                }
 
-                person.sex = jsonPerson.getString(SEX);
-                person.hair = jsonPerson.getString(HAIR);
-                person.eye = jsonPerson.getString(EYE);
-                person.race = jsonPerson.getString(RACE);
+                try {
+                    person.lastName = jsonPerson.getString(LAST_NAME);
+                } catch (JSONException e) {
+                    person.lastName = null;
+                }
 
-                person.description = jsonPerson.getString(DESCRIPTION);
-                person.photo = jsonPerson.getJSONArray(PHOTOS).getJSONObject(0).getString(MOBILE);
-                person.thumb = jsonPerson.getJSONArray(PHOTOS).getJSONObject(0).getString(THUMB);
+                try {
+                    person.age = jsonPerson.getInt(AGE);
+                } catch (JSONException e) {
+                    person.age = 0;
+                }
+
+                try {
+                    person.height = jsonPerson.getInt(HEIGHT);
+                } catch (JSONException e) {
+                    person.height = 0;
+                }
+
+                try {
+                    person.weight = jsonPerson.getInt(WEIGHT);
+                } catch (JSONException e) {
+                    person.weight = 0;
+                }
+
+                try {
+                    person.sex = jsonPerson.getString(SEX);
+                } catch (JSONException e) {
+                    person.sex = null;
+                }
+
+                try {
+                    person.hair = jsonPerson.getString(HAIR);
+                } catch (JSONException e) {
+                    person.hair = null;
+                }
+
+                try {
+                    person.eye = jsonPerson.getString(EYE);
+                } catch (JSONException e) {
+                    person.eye = null;
+                }
+
+                try {
+                    person.race = jsonPerson.getString(RACE);
+                } catch (JSONException e) {
+                    person.race = null;
+                }
+
+                try {
+                    person.description = jsonPerson.getString(DESCRIPTION);
+                } catch (JSONException e) {
+                    person.description = null;
+                }
+
+                try {
+                    person.photo = jsonPerson.getJSONArray(PHOTOS).getJSONObject(0).getString(MOBILE);
+                } catch (JSONException e) {
+                    person.photo = null;
+                }
+
+                try {
+                    person.thumb = jsonPerson.getJSONArray(PHOTOS).getJSONObject(0).getString(THUMB);
+                } catch (JSONException e) {
+                    person.thumb = null;
+                }
 
                 if (fuzzyMatch == null) {
                     persons.add(person);
                 } else {
-                    if (person.firstName.contains(fuzzyMatch) || person.middleName.contains(fuzzyMatch)
-                                    || person.lastName.contains(fuzzyMatch)) {
+                    if (((person.firstName != null) && person.firstName.contains(fuzzyMatch))
+                                    || ((person.middleName != null) && person.middleName.contains(fuzzyMatch))
+                                    || ((person.lastName != null) && person.lastName.contains(fuzzyMatch))) {
                         persons.add(person);
                     }
                 }
