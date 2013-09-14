@@ -154,19 +154,35 @@ public class MainActivity extends Activity {
     }
 
     private void selectItem(int position) {
-        // update the main content by replacing fragments
-        Fragment fragment = new SampleFragment();
-        Bundle args = new Bundle();
-        args.putInt(SampleFragment.ARG_PAGE_NUMBER, position);
-        fragment.setArguments(args);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-        // update selected item and title, then close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
+    	FragmentManager fragmentManager = getFragmentManager();
+    	Bundle args = new Bundle();
+        
+    	switch(position){
+        case 0:
+        	Fragment psFragment = new PersonSearchFragment();
+	        psFragment.setArguments(args);
+	
+	        
+	        fragmentManager.beginTransaction().replace(R.id.content_frame, psFragment).commit();
+	
+	        // update selected item and title, then close the drawer
+	        mDrawerList.setItemChecked(position, true);
+	        setTitle(mPlanetTitles[position]);
+	        mDrawerLayout.closeDrawer(mDrawerList);
+        	break;
+        default:
+	    	// update the main content by replacing fragments
+	        Fragment fragment = new SampleFragment();
+	        fragment.setArguments(args);
+	
+	        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	
+	        // update selected item and title, then close the drawer
+	        mDrawerList.setItemChecked(position, true);
+	        setTitle(mPlanetTitles[position]);
+	        mDrawerLayout.closeDrawer(mDrawerList);
+	        break;
+        }
     }
 
     @Override
