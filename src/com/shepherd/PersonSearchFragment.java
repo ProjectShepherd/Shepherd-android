@@ -3,6 +3,7 @@ package com.shepherd;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +12,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
@@ -33,7 +35,7 @@ import android.widget.Toast;
 /**
  * Fragment that appears in the "content_frame", shows a planet
  */
-public class PersonSearchFragment extends ListFragment implements Listener<JSONObject>, ErrorListener{
+public class PersonSearchFragment extends ListFragment implements Listener<JSONArray>, ErrorListener{
 
 	protected View mFormView, mStatusView;
 	private RequestQueue volleyQueue;
@@ -57,7 +59,7 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONO
         
 		
 		volleyQueue = Volley.newRequestQueue(this.getActivity());
-		volleyQueue.add(new JsonObjectRequest(Method.GET, NetUtils.MissingPeopleURL+".json", null, this, this));
+		volleyQueue.add(new JsonArrayRequest(NetUtils.MissingPeopleURL+".json", this, this));
         
         
         String page = getResources().getStringArray(R.array.pages_array)[0];
@@ -68,8 +70,8 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONO
     
     
     @Override
-	public void onResponse(JSONObject response) {
-    	Log.e("sheperd","json response");
+	public void onResponse(JSONArray response) {
+    	Log.e("sheperd",response.toString());
     	
     	mStatusView.setVisibility(View.GONE);
 		mFormView.setVisibility(View.VISIBLE);
@@ -80,10 +82,9 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONO
 		setListAdapter(adapter);
 		
 		people = PersonUtils.getMissingPersons(response.toString(), null);
-		
-		adapter.add(new Person());
-		people.add(new Person());
-		people.add(new Person());
+		for(Person p : people){
+			adapter.add(p);
+		}
     }
     
     @Override
@@ -100,7 +101,8 @@ public class PersonSearchFragment extends ListFragment implements Listener<JSONO
 
 	@Override
 	public void onErrorResponse(VolleyError arg0) {
-		Log.e("sheperd","volley error");
+		arg0.printStackTrace();
+		Log.e("shepherd","volley error");
 		//Toast.makeText(context, text, duration)
 	}
     
