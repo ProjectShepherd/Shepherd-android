@@ -217,20 +217,20 @@ public class MainActivity extends FragmentActivity implements ImageLoaderProvide
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    
+
     @Override
-    public void onDestroy(){
-    	super.onDestroy();
-    	requestQueue.stop();
+    public void onDestroy() {
+        super.onDestroy();
+        requestQueue.stop();
     }
 
     @Override
     public ImageLoader getImageLoaderInstance() {
         return imageLoader;
     }
-    
-    public RequestQueue getRequestQueue(){
-    	return requestQueue;
+
+    public RequestQueue getRequestQueue() {
+        return requestQueue;
     }
 
 }
